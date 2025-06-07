@@ -31,3 +31,20 @@ build/
 
 ### VS Code ###
 .vscode/
+# Java / Spring Boot
+target/
+*.class
+*.jar
+*.war
+*.iml
+.idea/
+.mvn/
+
+# Node / React
+pokedex-pokemon-app/node_modules/
+pokedex-pokemon-app/.next/
+pokedex-pokemon-app/build/
+
+# General
+.DS_Store
+.env

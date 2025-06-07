@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin("http://localhost:3000/")
 @RequestMapping("/api/pokemons")
 public class PokemonController {
     @Autowired
@@ -30,18 +31,12 @@ public class PokemonController {
 
 
 
-
     //Updation of Pokemon by Id
     @PutMapping("/{pokemonId}")
-    public ResponseEntity<PokemonDTO> updatePokemon(@Valid @RequestBody PokemonDTO pokemonDTO , @PathVariable Long pokemonId )
-    {
-        PokemonDTO pokemons = this.pokemonService.updatePokemon(pokemonDTO, pokemonId);
-        return new ResponseEntity<PokemonDTO>(pokemons , HttpStatus.OK );
+    public ResponseEntity<ApiResponse> updatePokemon(@Valid @RequestBody PokemonDTO pokemonDTO, @PathVariable Long pokemonId) {
+        this.pokemonService.updatePokemon(pokemonDTO, pokemonId);
+        return new ResponseEntity<>(new ApiResponse("Updated successfully", true), HttpStatus.OK);
     }
-
-
-
-
 
 
     //delete
@@ -51,8 +46,6 @@ public class PokemonController {
         this.pokemonService.deletePokemon(pokemonId);
         return new ResponseEntity<ApiResponse>(new ApiResponse("Pokemon deleted successfully" , true), HttpStatus.OK);
     }
-
-
 
 
 
@@ -80,7 +73,5 @@ public class PokemonController {
         ApiResponse response = new ApiResponse(ex.getMessage(), false);
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
-
-
 
 }
